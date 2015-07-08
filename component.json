@@ -1,0 +1,18 @@
+{
+  "name": "vendor-component",
+  "repo": "abstudio/vendor-component",
+  "description": "Vendor component",
+  "version": "0.0.1",
+  "keywords": ["vendor"],
+  "dependencies": {},
+  "scripts": [
+    "index.js"
+  ],
+  "license": "MIT",
+  "remotes": [
+    "github"
+  ],
+  "tags": [
+    "plugin"
+  ]
+}
