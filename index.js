@@ -12,7 +12,7 @@
 		var url = this.location+module.exports.scripts[0];
 		if (optional.length>0) {
 			
-			if ("object"===typeof module.exports.optional&&module.exports.optional[optional]==="string") {
+			if ("object"===typeof module.exports.optional&&typeof module.exports.optional[optional]==="string") {
 				/*
 				Переходим по опциональной ссылке
 				*/
@@ -78,7 +78,7 @@
 									resource.ready();
 								});
 							}
-
+							
 							if (depends.length>0) {
 								vendor(depends, function() {
 									var mod = this;
@@ -104,6 +104,7 @@
 							}.bind(module.exports, resource.location)
 							
 						} else {
+							console.dir(resource);
 							throw new Error('Undefined component version '+resource.url+'#'+resource.hash);
 						}
 					}
