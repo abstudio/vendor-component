@@ -33,9 +33,7 @@
 	Vendor.config({	
 		requireAlias: 'vendor',
 		aliases: {
-			'components': 'components/',
-			'abstudio': 'http://studio:88/components/',
-			'polyvitamins': 'http://studio:88/polyvitamins/'
+			
 		},
 		rerouting: [
 			{
