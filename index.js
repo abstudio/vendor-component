@@ -1,5 +1,6 @@
 !(function() {
-	var dirname = function(url) {
+	var regComponent = /^([a-z_\-0-9]*)~([a-z_\-0-9]*)@([0-9a-z\.]*)$/i,
+	dirname = function(url) {
 		return /^((.*)[\\\/]|\.)[^\\\/]*$/.exec(url)[1];
 	}
 	/*
@@ -29,6 +30,22 @@
 			callback(content);
 		});
 	}
+	/*
+	Поддержка указания имени в формате component
+	*/
+	Vendor.addUrlParser(function(url, settings) {
+		if (regComponent.test(url)) {
+			var d = regComponent.exec(url),
+			comp = d[1],
+			component = d[2],
+			release = d[3];
+
+			if ("string"===typeof settings.aliases[comp]) {
+				return settings.aliases[comp]+component+'/component.json#'+release;
+			}
+		}
+		return url;
+	});
 
 	Vendor.config({	
 		requireAlias: 'vendor',
@@ -61,9 +78,9 @@
 										names.push(linkName);
 										
 										if ("string"===typeof Vendor.config.aliases[mmn[0]]) {
-											depends.push(mmn[0]+'//'+mmn[1]+'/component.json#'+module.exports.dependencies[submod]);
+											depends.push(mmn[0]+'/'+mmn[1]+'/component.json#'+module.exports.dependencies[submod]);
 										} else {
-											depends.push('components//'+mmn[0]+'/'+mmn[1]+'/'+module.exports.dependencies[submod]+'/component.json');
+											depends.push('components/'+mmn[0]+'/'+mmn[1]+'/'+module.exports.dependencies[submod]+'/component.json');
 										}
 								}
 							}
